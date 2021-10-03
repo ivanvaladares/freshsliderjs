@@ -136,8 +136,8 @@
         var isRight = true;
         var isDown = false;
 
-        this.mousedown(function(e){
-            if(!enabled){
+        var onMoveStart = function (e) {
+            if(!enabled) {
                 return;
             }
 
@@ -189,7 +189,7 @@
             else{
                 return false;
             }
-        });
+        };
 
         var onMouseUp = function(){
             if(!enabled){
@@ -208,6 +208,10 @@
             if(isDown)
                 onMouseUp();
         });
+
+        $(window).resize(updateCarets);
+
+        $(this).find(".fscaret").on("mousedown touchmove", onMoveStart);
 
         this.mousemove(function(e){
             if(!enabled){
